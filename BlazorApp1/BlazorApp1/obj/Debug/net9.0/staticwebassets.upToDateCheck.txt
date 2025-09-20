@@ -1,0 +1,2 @@
+wwwroot\app.css
+C:\Shostak Valily\BlazorApp1\BlazorApp1\wwwroot\app.css

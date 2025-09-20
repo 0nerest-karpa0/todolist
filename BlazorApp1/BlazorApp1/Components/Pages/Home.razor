@@ -1,0 +1,45 @@
+﻿@page "/"
+
+<PageTitle>Task List</PageTitle>
+
+<h1>Task List</h1>
+
+
+@foreach (Task task in tasks)
+{
+    <div class="task" style="display:flex;">
+        <input type="checkbox" />
+        <p>@task.Name</p>
+        <button @onclick="() => DeleteTask(task.Id)">delete</button>
+    </div>
+}
+
+<div style="margin-top:10px;">
+    <input @bind = "taskName" type="text" />
+    <button @onclick="() => AddTask()">Add</button>
+</div>
+
+@code
+{
+    private class Task
+    {
+        public string Name { get; set; } = "";
+        public int Id { get; set; } = 0;
+    }
+
+    private List<Task> tasks = new List<Task> {};
+
+    string taskName = "";
+
+
+    public void AddTask()
+    {
+        tasks.Add(new Task { Name = taskName, Id = tasks.Count});
+    }
+
+    public void DeleteTask(int id)
+    {
+        Task taskToRemove = tasks.Find(t => t.Id == id);
+        tasks.Remove(taskToRemove);
+    }
+}
