@@ -2,20 +2,41 @@
 
 <PageTitle>Task List</PageTitle>
 
-<h1>Task List</h1>
+<style>
+    body
+    {
+        background-color:black;
+        color:white;
+        font-family: Consolas;
+    }
+    .task
+    {
+        display:flex;
+    }
+    .input-field
+    {
+        font-family: Consolas;
+    }
+    .content
+    {
+        left:50%;
+    }
 
+</style>
+
+<h1>Task List</h1>
 
 @foreach (Task task in tasks)
 {
-    <div class="task" style="display:flex;">
+    <div class="task">
         <input type="checkbox" />
         <p>@task.Name</p>
         <button @onclick="() => DeleteTask(task.Id)">delete</button>
     </div>
 }
 
-<div style="margin-top:10px;">
-    <input @bind = "taskName" type="text" />
+<div class="input-field">
+    <input @bind="taskName" type="text" />
     <button @onclick="() => AddTask()">Add</button>
 </div>
 
@@ -35,6 +56,7 @@
     public void AddTask()
     {
         tasks.Add(new Task { Name = taskName, Id = tasks.Count});
+        taskName = "";
     }
 
     public void DeleteTask(int id)
